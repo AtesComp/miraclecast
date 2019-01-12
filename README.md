@@ -38,7 +38,7 @@ The MiracleCast projects requires the following software to be installed:
 
  - **P2P Wi-Fi device** Although widespread these days, there are some devices not compatible with [Wi-Fi Direct](http://en.wikipedia.org/wiki/Wi-Fi_Direct) (previously know as Wi-Fi P2P). Test yours with [res/test-hardware-capabilities.sh](https://github.com/albfan/miraclecast/blob/master/res/test-hardware-capabilities.sh)
 
- - **DBus Policy** The dbus policy [res/org.freedesktop.miracle.conf] should be copied to "/etc/dbus-1/system.d/". The installation process will do this automatically.
+ - **DBus Policy** The dbus policy, [res/org.freedesktop.miracle.conf](https://github.com/albfan/miraclecast/blob/master/res/org.freedesktop.miracle.conf), should be copied to "/etc/dbus-1/system.d/". The installation process should do this automatically.
 
 ## Build and install
 
