@@ -93,48 +93,133 @@ If you feel confidence enough (since systemd is the entrypoint for an OS) extrac
 
 ## Documentation
 
-Steps to use it as sink:
+Steps to activate MiracleCast services:
 
- 1. shutdown wpa_supplicant and NetworkManager
+ 1. Check the status of the MiracleCast services
+ 
+        $ systemctl status miracle-dispd.service
+        # This will display the current status of the MiracleCast Display Daemon
+        # It works with the MiracleCast WiFi Daemon
+        
+        $ systemctl status miracle-dispd.service
+        # This will display the current status of the MiracleCast WiFi Daemon
+        
+ 2. If needed, start the MiracleCast services
+ 
+        $ sudo systemctl start miracle-dispd.service
+        # This will start the the MiracleCast Display Daemon
+        # It will also start the MiracleCast WiFi Daemon
+        
+        # You may control them independently as needed
+        
+Steps to use MiracleCast as a sink:
 
-        $ sudo kill -9 $(ps -ef | grep wpa_supplican[t] | awk '{print $2}')
-        # now you can use `res/kill-wpa.sh`
+ 1. The MiracleCast WiFi Daemon must be started and active.  See above.
 
-        >Remember to save your config to use with `res/normal-wifi.sh`
-        >it will be easily located with `ps -ef | grep wpa_supplicant` on `-c` option.
-
- 2. launch wifi daemon
-
-        $ sudo miracle-wifid &
-
- 3. launch sink control (your network card will be detected. here 3)
+ 2. Launch the MiracleCast Sink control (your network card will be detected as a link; the example link here is 3)
 
         $ sudo miracle-sinkctl
         [ADD]  Link: 3
+        [miraclectl] #
 
- 4. run WiFi Display on link: 
+ 3. Set the link to managed (this will force the network card to be taken by MiracleCast from NetworkManager after a few seconds)
+ 
+        [miraclectl] # set-managed 3 yes
 
-        > run 3
+ 4. Run WiFi Display on the link: 
 
- 5. Pair your machine with other miracast device (mirroring)
+        [miraclectl] # run 3
 
- 6. See your screen device on this machine
+ 5. Pair your machine with other Miracast device (mirroring)
 
-Steps to use it as peer:
+ 6. See your Miracast screen device on this machine
+ 
+ 7. When finished, set the link to unmanaged--this will release the network card to NetworkManager
+ 
+        [miraclectl] # set-managed 3 no
 
- 1. Repeat steps 1 and 2 from "use as sink"
+ 8. Exit the MiracleCast Sink control
 
- 2. launch wifi control
+        [miraclectl] # quit
+
+Steps to use MiracleCast as a display source:
+
+ 1. The MiracleCast Display Daemon must be started and active.  See above.
+
+ 2. Launch the MiracleCast Display control with connection options "-i" for your network card as identified by "ifconfig" and "-p" for your peers MAC address (this will force the network card to be taken by MiracleCast from NetworkManager)
+
+        $ sudo miracle-dispctl -i myNICid -p 00:00:00:00:00:00
+
+ 3. The MiracleCast Display control will use the daemons to automate a display connection to the peer
+ 
+        miracle-dispctl: peer-mac=00:00:00:00:00:00
+        miracle-dispctl: display=:0
+        miracle-dispctl: authority=/home/someuser/.Xauthority
+        miracle-dispctl: interface=myNICid
+        miracle-dispctl: wfd_subelemens=000600001c4400c8
+        miracle-dispctl: monitor-num=0
+        miracle-dispctl: wait for peer '00:00:00:00:00:00'...
+
+ 4. Exit the MiracleCast Display control
+
+        ctrl-C
+
+        ^Cmiracle-dispctl: failed to cast to wireless display: Operation was cancelled
+        miracle-dispctl: Bye
+
+Steps to use MiracleCast as a peer:
+
+ 1. The MiracleCast WiFi Daemon must be started and active.  See above.
+
+ 2. Launch the MiracleCast WiFi control (your network card will be detected as a link; the example link here is 3)
 
         $ sudo miracle-wifictl
+        [ADD]  Link: 3
+        [miraclectl] #
 
- 3. Enable visibility for other devices
+ 3. Select the link to use--simplifies the following commands as the selected link is assumed
+ 
+        [miraclectl] # select 3
 
- 4. Locate them using scanning
+ 4. Set a friendly name for other peers to see
+ 
+        [miraclectl] # set-friendly-name SomeAwesomeNa,e
 
-        > p2p-scan
+ 4. Set the link to managed--this will force the network card to be taken by MiracleCast from NetworkManager after a few seconds
+ 
+        [miraclectl] # set-managed yes
 
- 5. Apart from list, or show info with peer &lt;mac&gt; there's nothing useful here by now. For a Q&D see [Using as peer](https://github.com/albfan/miraclecast/issues/4)
+ 5. Commands:
+
+   Locate other peers using P2P scanning
+
+        [miraclectl] # p2p-scan
+
+   Stop P2P scanning
+
+        [miraclectl] # p2p-scan stop
+
+   List other peers 
+
+        [miraclectl] # list
+
+   Show detailed information on other peers 
+
+        [miraclectl] # show 4
+
+   Connect to a peer--the sink may require a provision or pin (not shown, see help)
+
+        [miraclectl] # connect 4
+
+   Disconnect from a peer
+
+        [miraclectl] # disconnect 4
+
+ 6. While connected, you may use the connection as a source with software using the connection such as miracle-gst and miracle-omxplayer
+
+ 7. Exit the MiracleCast WiFi control
+
+        [miraclectl] # quit
 
 ## UIBC
 

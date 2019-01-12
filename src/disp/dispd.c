@@ -386,7 +386,7 @@ void ctl_fn_peer_new(struct ctl_peer *p)
 	}
 
 	if(wfd_sube_device_is_source(&sube)) {
-		log_info("source %s ignired", p->label);
+		log_info("source %s ignored", p->label);
 	}
 }
 
