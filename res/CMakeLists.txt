@@ -138,3 +138,7 @@ install(
     FILES miracle-wifid miracle-sinkctl miracle-wifictl
     DESTINATION ${DATADIR}/bash-completion/completions
     )
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7eebb9ceb4bf87013da42d48aa659a515fa907f7
