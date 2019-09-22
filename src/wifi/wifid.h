@@ -129,7 +129,8 @@ struct link {
 	char *ifname;
 	char *friendly_name;
 	char *wfd_subelements;
-    char *mac_addr;
+	char *config_methods;
+	char *mac_addr;
 	int p2p_state;		/* 0: unknown, 1: supported, -1: unsupproted */
 
 	size_t peer_cnt;
@@ -165,6 +166,7 @@ int link_manage(struct link *l, bool set);
 bool link_get_managed(struct link *l);
 int link_renamed(struct link *l, const char *ifname);
 
+int link_set_config_methods(struct link *l, char *config_methods);
 int link_set_friendly_name(struct link *l, const char *name);
 const char *link_get_friendly_name(struct link *l);
 int link_set_wfd_subelements(struct link *l, const char *val);
@@ -196,6 +198,7 @@ struct manager {
 	sd_event_source *udev_mon_source;
 
 	char *friendly_name;
+	char *config_methods;
 
 	size_t link_cnt;
 	struct shl_htable links;

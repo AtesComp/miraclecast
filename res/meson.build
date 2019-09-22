@@ -72,3 +72,8 @@ executable('miracle-dispctl', miracle_dispctl_src,
   vala_args: valac_extra_args,
   install: true
 )
+
+install_data(
+  'miracle-wifid', 'miracle-sinkctl', 'miracle-wifictl',
+  install_dir: join_paths(get_option('datadir'), 'bash-completions', 'completions')
+)

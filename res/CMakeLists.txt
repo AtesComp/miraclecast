@@ -131,6 +131,10 @@ install(
 
 install(
 	FILES org.freedesktop.miracle.conf
-	DESTINATION $ENV{DESTDIR}/etc/dbus-1/system.d 
+	DESTINATION $ENV{DESTDIR}/etc/dbus-1/system.d
 	)
 
+install(
+    FILES miracle-wifid miracle-sinkctl miracle-wifictl
+    DESTINATION ${DATADIR}/bash-completion/completions
+    )

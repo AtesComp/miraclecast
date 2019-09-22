@@ -260,7 +260,7 @@ static int dispd_fetch_info(sd_event_source *s, void *userdata)
 	int r;
 
 	sd_event_source_unref(s);
-   
+
 	r = ctl_wifi_fetch(dispd->wifi);
 	if(0 > r) {
 		log_warning("failed to fetch information about links and peers: %s",

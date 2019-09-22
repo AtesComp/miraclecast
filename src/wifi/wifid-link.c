@@ -142,6 +142,7 @@ void link_free(struct link *l)
 	free(l->wfd_subelements);
 	free(l->friendly_name);
 	free(l->ifname);
+	free(l->config_methods);
 	free(l);
 }
 
