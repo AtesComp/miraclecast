@@ -1,7 +1,7 @@
 # MiracleCast - Wifi-Display/Miracast Implementation
 
 [![Join the chat at https://gitter.im/albfan/miraclecast](https://badges.gitter.im/albfan/miraclecast.svg)](https://gitter.im/albfan/miraclecast?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://semaphoreci.com/api/v1/albfan/miraclecast-2/branches/master/badge.svg)](https://semaphoreci.com/albfan/miraclecast-2)
+[![Build Status](https://semaphoreci.com/api/v1/albfan/miraclecast-2/branches/master/badge.svg)](https://semaphoreci.com/albfan/miraclecast)
 [![Coverage Status](https://coveralls.io/repos/github/albfan/miraclecast/badge.svg?branch=master)](https://coveralls.io/github/albfan/miraclecast?branch=master)
 
 The MiracleCast project provides software to connect external monitors to your system via Wi-Fi. It is compatible with the Wifi-Display specification also known as Miracast. MiracleCast implements the Display-Source as well as Display-Sink side.
@@ -38,7 +38,7 @@ The MiracleCast projects requires the following software to be installed:
 
  - **P2P Wi-Fi device** Although widespread these days, there are some devices not compatible with [Wi-Fi Direct](http://en.wikipedia.org/wiki/Wi-Fi_Direct) (previously know as Wi-Fi P2P). Test yours with [res/test-hardware-capabilities.sh](https://github.com/albfan/miraclecast/blob/master/res/test-hardware-capabilities.sh)
 
- - **DBus Policy** The dbus policy [res/org.freedesktop.miracle.conf] should be copied to "/etc/dbus-1/system.d/". The installation process will do this automatically.
+ - **DBus Policy** The dbus policy, [res/org.freedesktop.miracle.conf](https://github.com/albfan/miraclecast/blob/master/res/org.freedesktop.miracle.conf), should be copied to "/etc/dbus-1/system.d/". The installation process should do this automatically.
 
 ## Build and install
 
@@ -183,7 +183,7 @@ Steps to use MiracleCast as a peer:
 
  4. Set a friendly name for other peers to see
 
-        [miraclectl] # set-friendly-name SomeAwesomeNa,e
+        [miraclectl] # set-friendly-name SomeAwesomeName
 
  4. Set the link to managed--this will force the network card to be taken by MiracleCast from NetworkManager after a few seconds
 
