@@ -9,11 +9,14 @@
 .deps/
 .dirstamp
 .libs/
+.vimrc
+.vscode/
 Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache/
-build-aux/
+build/
+builddir/
 config.h
 config.h.in
 config.h.in~
@@ -41,4 +44,3 @@ cmake_install.cmake
 CMakeCache.txt
 libmiracle-shared.a
 install_manifest.txt
-/build/
